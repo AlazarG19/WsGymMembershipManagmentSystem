@@ -256,7 +256,7 @@ class Action
 		$start_date_obj = new DateTime($start_date);
 
 		// Add 30 days to the start date
-		$start_date_obj->modify('+30 days');
+		$start_date_obj->modify('+31 days');
 
 		// Format the end date as per your requirement
 		$end_date = $start_date_obj->format('Y-m-d');
@@ -294,7 +294,7 @@ class Action
 	{
 		$id = $_POST["id"];
 
-		$delete = $this->db->query("DELETE FROM packages where id = " . $id);
+		$delete = $this->db->query("DELETE FROM customer where id = " . $id);
 		if ($delete) {
 			return 1;
 		}
