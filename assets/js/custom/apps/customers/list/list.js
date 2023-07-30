@@ -81,19 +81,21 @@ var KTCustomersList = function () {
     // Delete customer
     var handleDeleteRows = () => {
         // Select all delete buttons
+
         const deleteButtons = table.querySelectorAll('[data-kt-customer-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
+            console.log("buton onclick")
             // Delete button on click
             d.addEventListener('click', function (e) {
                 e.preventDefault();
-
+                console.log(this)
+                let id = this.dataset.id
                 // Select parent row
                 const parent = e.target.closest('tr');
 
                 // Get customer name
-                const customerName = parent.querySelectorAll('td')[1].innerText;
-
+                const customerName = parent.querySelectorAll('td')[0].innerText;
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
                     text: "Are you sure you want to delete " + customerName + "?",
@@ -107,19 +109,57 @@ var KTCustomersList = function () {
                         cancelButton: "btn fw-bold btn-active-light-primary"
                     }
                 }).then(function (result) {
+
                     if (result.value) {
-                        Swal.fire({
-                            text: "You have deleted " + customerName + "!.",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
+                        $.ajax({
+                            url: 'ajax.php?action=delete_customer',
+                            method: 'POST',
+                            data: { id },
+                            error: err => {
+                                Swal.fire({
+                                    text: customerName + " was not deleted.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
+                                console.log(err)
+                                // $('#login-form button[type="button"]').removeAttr('disabled').html('Login');
+
+                            },
+                            success: function (resp) {
+                                console.log(resp)
+                                if (resp == 1) {
+
+                                    Swal.fire({
+                                        text: "You have deleted " + customerName + "!.",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    }).then(function () {
+                                        // Remove current row
+                                        datatable.row($(parent)).remove().draw();
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        text: "Something went wrong. Please Try Again",
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    });
+                                }
+                                // Enable button
+
                             }
-                        }).then(function () {
-                            // Remove current row
-                            datatable.row($(parent)).remove().draw();
-                        });
+                        })
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
                             text: customerName + " was not deleted.",
@@ -135,6 +175,90 @@ var KTCustomersList = function () {
             })
         });
     }
+    // 
+    // Delete customer
+    var handleRenewRows = () => {
+        console.log("renew fucntions")
+        // Select all delete buttons
+        const renewButtons = table.querySelectorAll('[data-kt-customer-table-filter="renew_row"]');
+
+        renewButtons.forEach(d => {
+            // Delete button on click
+            d.addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log(this)
+                let id = this.dataset.id
+                // Select parent row
+                const parent = e.target.closest('tr');
+
+                // Get customer name
+                const customerName = parent.querySelectorAll('td')[0].innerText;
+                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+                Swal.fire({
+                    text: "Are you sure you want to renew  " + customerName + " package?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    confirmButtonText: "Yes, Renew!",
+                    cancelButtonText: "No, cancel",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-danger",
+                        cancelButton: "btn fw-bold btn-active-light-primary"
+                    }
+                }).then(function (result) {
+
+                    if (result.value) {
+                        $.ajax({
+                            url: 'ajax.php?action=renew_customer',
+                            method: 'POST',
+                            data: { id },
+                            error: err => {
+                                Swal.fire({
+                                    text: customerName + " was not renewed.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
+                                console.log(err)
+                            },
+                            success: function (resp) {
+                                console.log(resp)
+                                Swal.fire({
+                                    text: "You have renewed " + customerName + "!.",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                }).then(function () {
+                                    location.reload();
+                                    // Remove current row
+                                    // datatable.row($(parent)).remove().draw();
+                                });
+                                // Enable button
+
+                            }
+                        })
+                    } else if (result.dismiss === 'cancel') {
+                        Swal.fire({
+                            text: customerName + " was not been renewed.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary",
+                            }
+                        });
+                    }
+                });
+            })
+        });
+    }
+    // 
 
     // Reset Filter
     var handleResetForm = () => {
@@ -261,7 +385,7 @@ var KTCustomersList = function () {
     return {
         init: function () {
             table = document.querySelector('#kt_customers_table');
-            
+
             if (!table) {
                 return;
             }
@@ -272,6 +396,7 @@ var KTCustomersList = function () {
             handleFilterDatatable();
             handleDeleteRows();
             handleResetForm();
+            handleRenewRows();
         }
     }
 }();

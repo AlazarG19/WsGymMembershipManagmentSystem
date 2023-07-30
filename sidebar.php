@@ -58,7 +58,7 @@
                 </div>
                 <!--end:Menu item-->
                 <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
                     <!--begin:Menu link-->
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -79,7 +79,7 @@
                     <div class="menu-sub menu-sub-accordion">
 
                         <!--begin:Menu item-->
-                        <div class="menu-item">
+                        <div class="menu-item here">
                             <!--begin:Menu link-->
                             <a class="menu-link" href="../../demo1/dist/pages/user-profile/projects.html">
                                 <span class="menu-bullet">
@@ -96,7 +96,7 @@
                 <!--end:Menu item-->
 
                 <!--begin:Menu item-->
-                <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
                     <!--begin:Menu link-->
                     <span class="menu-link">
                         <span class="menu-icon">
@@ -109,7 +109,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Package</span>
+                        <span class="menu-title here">Package</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <!--end:Menu link-->
@@ -117,13 +117,13 @@
                     <div class="menu-sub menu-sub-accordion">
 
                         <!--begin:Menu item-->
-                        <div class="menu-item">
+                        <div class="menu-item here">
                             <!--begin:Menu link-->
                             <a class="menu-link" href="../../demo1/dist/pages/team.html">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">View Package</span>
+                                <span class="menu-title ">View Package</span>
                             </a>
                             <!--end:Menu link-->
                         </div>
@@ -131,15 +131,6 @@
 
                     </div>
                     <!--end:Menu sub-->
-                </div>
-                <!--end:Menu item-->
-                <!--begin:Menu item-->
-                <div class="menu-item pt-5">
-                    <!--begin:Menu content-->
-                    <div class="menu-content">
-                        <span class="menu-heading fw-bold text-uppercase fs-7">Layouts</span>
-                    </div>
-                    <!--end:Menu content-->
                 </div>
                 <!--end:Menu item-->
             </div>

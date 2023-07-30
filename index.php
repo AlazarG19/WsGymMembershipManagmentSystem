@@ -1,16 +1,6 @@
 <!DOCTYPE html>
-<!--
-Author: Keenthemes
-Product Name: Keen
-Product Version: 3.0.3
-Purchase: https://themes.getbootstrap.com/product/keen-the-ultimate-bootstrap-admin-theme/
-Website: http://www.keenthemes.com
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
+<?php
+include 'db_connect.php'; ?>
 <html lang="en">
 <!--begin::Head-->
 
@@ -4431,7 +4421,15 @@ License: For each use you must have a valid license purchased only from above li
 															<!--begin::Info-->
 															<div class="d-flex align-items-center mb-2">
 																<!--begin::Value-->
-																<span class="fs-2hx fw-bold text-success me-2 lh-1 ls-n2">014</span>
+																<span class="fs-2hx fw-bold text-success me-2 lh-1 ls-n2">
+																	<?php
+																	$query = "SELECT COUNT(*) AS count_rows FROM members WHERE end_date > CURDATE()";
+																	$result = mysqli_query($conn, $query);
+																	$row = mysqli_fetch_assoc($result);
+																	$countRows = $row['count_rows'];
+																	echo $countRows;
+																	?>
+																</span>
 																<!--end::Value-->
 																<!--begin::Label-->
 																<span class="d-flex align-items-end text-gray-400 fs-6 fw-semibold">active</span>
@@ -4457,7 +4455,15 @@ License: For each use you must have a valid license purchased only from above li
 															<!--begin::Info-->
 															<div class="d-flex align-items-center mb-2">
 																<!--begin::Value-->
-																<span class="fs-2hx fw-bold text-danger me-2 lh-1 ls-n2">14</span>
+																<span class="fs-2hx fw-bold text-danger me-2 lh-1 ls-n2">
+																	<?php
+																	$query = "SELECT COUNT(*) AS count_rows FROM members WHERE end_date < CURDATE()";
+																	$result = mysqli_query($conn, $query);
+																	$row = mysqli_fetch_assoc($result);
+																	$countRows = $row['count_rows'];
+																	echo $countRows;
+																	?>
+																</span>
 																<!--end::Value-->
 																<!--begin::Label-->
 																<span class="d-flex align-items-end text-gray-400 fs-6 fw-semibold">Expired</span>
@@ -4530,21 +4536,7 @@ License: For each use you must have a valid license purchased only from above li
 	<div id="kt_activities" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="activities" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'300px', 'lg': '900px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#kt_activities_toggle" data-kt-drawer-close="#kt_activities_close">
 		<div class="card shadow-none border-0 rounded-0">
 			<!--begin::Header-->
-			<div class="card-header" id="kt_activities_header">
-				<h3 class="card-title fw-bold text-dark">Activity Logs</h3>
-				<div class="card-toolbar">
-					<button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5" id="kt_activities_close">
-						<!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-						<span class="svg-icon svg-icon-1">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="currentColor" />
-								<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="currentColor" />
-							</svg>
-						</span>
-						<!--end::Svg Icon-->
-					</button>
-				</div>
-			</div>
+			<?php include("./navbar.php") ?>
 			<!--end::Header-->
 			<!--begin::Body-->
 			<div class="card-body position-relative" id="kt_activities_body">
