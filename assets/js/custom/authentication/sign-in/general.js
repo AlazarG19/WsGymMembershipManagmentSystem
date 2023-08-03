@@ -92,6 +92,7 @@ var KTSigninGeneral = function () {
                                         form.querySelector('[name="username"]').value = "";
                                         form.querySelector('[name="password"]').value = "";
                                         //form.submit(); // submit form
+                                        sessionStorage.setItem("is_logged_in", true);
                                         var redirectUrl = "./index.php";
                                         console.log(redirectUrl);
                                         if (redirectUrl) {

@@ -30,7 +30,7 @@
                 <!--begin:Menu item-->
                 <div data-kt-menu-trigger="click" class="menu-item here menu-accordion">
                     <!--begin:Menu link-->
-                    <a class="menu-item here" href="../gym%20management%20system/index.php">
+                    <a class="menu-item here" href="/index.php">
 
                         <span class="menu-link here">
                             <span class="menu-icon">
@@ -84,7 +84,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item here">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="../gym%20management%20system/add_member.php">
+                            <a class="menu-link" href="/add_member.php">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
@@ -122,7 +122,7 @@
                         <!--begin:Menu item-->
                         <div class="menu-item here">
                             <!--begin:Menu link-->
-                            <a class="menu-link" href="../gym%20management%20system/add_packages.php">
+                            <a class="menu-link" href="/add_packages.php">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>

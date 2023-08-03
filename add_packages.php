@@ -3157,6 +3157,12 @@ License: For each use you must have a valid license purchased only from above li
             }
         });
     </script>
+    <script>
+        if (!sessionStorage.getItem("is_logged_in")) {
+            // Redirect the user to the login page or show an error message
+            window.location.href = "sign-in.php";
+        }
+    </script>
     <!--end::Custom Javascript-->
 
     <!--end::Javascript-->

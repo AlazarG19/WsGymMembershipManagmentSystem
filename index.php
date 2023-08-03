@@ -259,6 +259,12 @@ include 'db_connect.php'; ?>
 	<script src="assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 	<script src="assets/js/custom/utilities/modals/bidding.js"></script>
 	<script src="assets/js/custom/utilities/modals/users-search.js"></script>
+	<script>
+		if (!sessionStorage.getItem("is_logged_in")) {
+			// Redirect the user to the login page or show an error message
+			window.location.href = "sign-in.php";
+		}
+	</script>
 	<!--end::Custom Javascript-->
 	<!--end::Javascript-->
 </body>
